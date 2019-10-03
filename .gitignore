@@ -1,0 +1,25 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*.pmd
+
+# Mac
+.DS_Store
+
+# Maven
+target/
+
+# NPM
+node_modules/
+
+# SSL
+*.jks
+*.p12
+
+*application-LOCAL-AWS-SECRETS.properties
