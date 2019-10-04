@@ -3,6 +3,7 @@ package net.birelian.forecast.service.impl;
 import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
+import javax.inject.Inject;
 import net.birelian.forecast.model.weather.Weather;
 import net.birelian.forecast.model.weather.WeatherDay;
 import net.birelian.forecast.service.HttpService;
@@ -11,10 +12,17 @@ import net.birelian.forecast.service.exception.ServiceException;
 
 public class WeatherServiceImpl implements WeatherService {
 
+	public static final int MAX_FUTURE_DAYS = 5;
 	private static final String SERVICE_URL = "https://www.metaweather.com/api/location/";
-	private static final int MAX_FUTURE_DAYS = 5;
 
-	private final HttpService httpService = new HttpServiceImpl();
+	// Injected dependencies
+	private final HttpService httpService;
+
+	@Inject
+	public WeatherServiceImpl(final HttpService httpService) {
+
+		this.httpService = httpService;
+	}
 
 	@Override
 	public WeatherDay getForecast(final String woeid, final LocalDate date, final boolean wind) {

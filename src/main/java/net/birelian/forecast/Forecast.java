@@ -1,16 +1,23 @@
 package net.birelian.forecast;
 
 import java.time.LocalDate;
+import javax.inject.Inject;
 import net.birelian.forecast.model.weather.WeatherDay;
 import net.birelian.forecast.service.CityService;
 import net.birelian.forecast.service.WeatherService;
-import net.birelian.forecast.service.impl.CityServiceImpl;
-import net.birelian.forecast.service.impl.WeatherServiceImpl;
 
 class Forecast {
 
-	private final CityService cityService = new CityServiceImpl();
-	private final WeatherService weatherService = new WeatherServiceImpl();
+	// Injected dependencies
+	private final CityService cityService;
+	private final WeatherService weatherService;
+
+	@Inject
+	Forecast(final CityService cityService, final WeatherService weatherService) {
+
+		this.cityService = cityService;
+		this.weatherService = weatherService;
+	}
 
 	/**
 	 * Get the weather prediction for today
@@ -34,7 +41,7 @@ class Forecast {
 	 *
 	 * @return The weather prediction for today
 	 */
-	String predict(final String cityName, LocalDate date, final boolean wind) {
+	String predict(final String cityName, final LocalDate date, final boolean wind) {
 
 		weatherService.validateDate(date);
 

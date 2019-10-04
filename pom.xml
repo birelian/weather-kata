@@ -1,23 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>team.codium</groupId>
-	<artifactId>weather-katas-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>net.birelian</groupId>
+	<artifactId>weather-kata</artifactId>
+	<version>1.0.0</version>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+		<commons-lang3.version>3.9</commons-lang3.version>
 		<gson.version>2.8.5</gson.version>
 		<hamcrest-all.version>1.3</hamcrest-all.version>
 		<junit.version>4.12</junit.version>
 		<junit-jupiter-api.version>RELEASE</junit-jupiter-api.version>
 		<lombok.version>1.18.10</lombok.version>
 		<okhttp.version>4.2.1</okhttp.version>
+		<guice.version>4.2.2</guice.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
@@ -29,6 +39,12 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 
 		<dependency>

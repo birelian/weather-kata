@@ -1,5 +1,6 @@
 package net.birelian.forecast.service.impl;
 
+import javax.inject.Inject;
 import net.birelian.forecast.model.City;
 import net.birelian.forecast.service.CityService;
 import net.birelian.forecast.service.HttpService;
@@ -12,7 +13,14 @@ public class CityServiceImpl implements CityService {
 
 	private static final String SERVICE_URL = "https://www.metaweather.com/api/location/search/?query=";
 
-	private final HttpService httpService = new HttpServiceImpl();
+	// Injected dependencies
+	private final HttpService httpService;
+
+	@Inject
+	public CityServiceImpl(final HttpService httpService) {
+
+		this.httpService = httpService;
+	}
 
 	@Override
 	public City getCity(final String cityName) {
