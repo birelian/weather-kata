@@ -19,7 +19,7 @@ public class WeatherServiceImpl implements WeatherService {
 	private final HttpService httpService;
 
 	@Inject
-	public WeatherServiceImpl(final HttpService httpService) {
+	WeatherServiceImpl(final HttpService httpService) {
 
 		this.httpService = httpService;
 	}

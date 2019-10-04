@@ -17,7 +17,7 @@ public class CityServiceImpl implements CityService {
 	private final HttpService httpService;
 
 	@Inject
-	public CityServiceImpl(final HttpService httpService) {
+	CityServiceImpl(final HttpService httpService) {
 
 		this.httpService = httpService;
 	}

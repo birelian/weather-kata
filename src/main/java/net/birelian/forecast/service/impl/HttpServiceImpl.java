@@ -22,6 +22,10 @@ public class HttpServiceImpl implements HttpService {
 	// GSON not be thread-safe. Use a ThreadLocal to avoid concurrency problems
 	private ThreadLocal<Gson> gson = ThreadLocal.withInitial(Gson::new);
 
+	HttpServiceImpl() {
+		// Avoid instantiation from outside the package
+	}
+
 	@Override
 	public <T> T get(String url, Class<T> classOfT) {
 
