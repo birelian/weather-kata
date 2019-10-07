@@ -1,6 +1,7 @@
 package net.birelian.forecast.service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import net.birelian.forecast.model.weather.WeatherDay;
 
 /**
@@ -16,7 +17,7 @@ public interface WeatherService {
 	 *
 	 * @return The forecast for the given day
 	 */
-	WeatherDay getForecast(String woeid, LocalDate date);
+	Optional<WeatherDay> getForecast(String woeid, LocalDate date);
 
 	/**
 	 * Validate that a date is valid for getting the forecast

@@ -2,9 +2,11 @@ package net.birelian.forecast;
 
 import java.time.LocalDate;
 import javax.inject.Inject;
+import net.birelian.forecast.model.City;
 import net.birelian.forecast.model.weather.WeatherDay;
 import net.birelian.forecast.service.CityService;
 import net.birelian.forecast.service.WeatherService;
+import net.birelian.forecast.service.exception.ServiceException;
 
 class Forecast {
 
@@ -39,14 +41,18 @@ class Forecast {
 	 * @param date The date
 	 * @param wind If true, get wind speed. Get weather otherwise
 	 *
-	 * @return The weather prediction for today
+	 * @return The weather prediction for the given date
 	 */
 	String predict(final String cityName, final LocalDate date, final boolean wind) {
 
 		weatherService.validateDate(date);
 
+		City city = cityService.getCity(cityName)
+			.orElseThrow(() -> new ServiceException("City " + cityName + " not found"));
+
 		// Get the weather for the given day
-		final WeatherDay weatherDay = weatherService.getForecast(cityService.getCity(cityName).getWoeid(), date);
+		final WeatherDay weatherDay = weatherService.getForecast(city.getWoeid(), date)
+			.orElseThrow(() -> new ServiceException("No weather for city " + cityName + " and date " + date));
 
 		return wind ?
 			weatherDay.getWind().toString() :

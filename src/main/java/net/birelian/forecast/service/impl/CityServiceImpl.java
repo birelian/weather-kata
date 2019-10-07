@@ -1,5 +1,6 @@
 package net.birelian.forecast.service.impl;
 
+import java.util.Optional;
 import javax.inject.Inject;
 import net.birelian.forecast.model.City;
 import net.birelian.forecast.service.CityService;
@@ -23,14 +24,18 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public City getCity(final String cityName) {
+	public Optional<City> getCity(final String cityName) {
 
 		final City[] cities = httpService.get(SERVICE_URL + cityName, City[].class);
 
-		if (cities.length != 1) {
-			throw new ServiceException("Unexpected number of cities");
-		}
+		if (cities.length == 0) {
+			return Optional.empty(); // City not found
 
-		return cities[0];
+		} else if (cities.length > 1) {
+			throw new ServiceException("Several cities match the name " + cityName);
+
+		} else  {
+			return Optional.of(cities[0]);
+		}
 	}
 }

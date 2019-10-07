@@ -1,9 +1,12 @@
 package net.birelian.forecast.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 
+import java.util.Optional;
 import net.birelian.forecast.model.City;
 import net.birelian.forecast.service.HttpService;
 import net.birelian.forecast.service.exception.ServiceException;
@@ -24,10 +27,11 @@ public class CityServiceImplTest {
 			.when(httpService.get(anyString(), any()))
 			.thenReturn(createCities(1));
 
-		City city = new CityServiceImpl(httpService).getCity(CITY);
+		Optional<City> city = new CityServiceImpl(httpService).getCity(CITY);
 
-		assertEquals(CITY, city.getTitle());
-		assertEquals(WOEID, city.getWoeid());
+		assertTrue(city.isPresent());
+		assertEquals(CITY,city.get().getTitle());
+		assertEquals(WOEID,city.get().getWoeid());
 
 	}
 
@@ -44,8 +48,8 @@ public class CityServiceImplTest {
 
 	}
 
-	@Test(expected = ServiceException.class)
-	public void getCityShouldThrowExceptionWhenNumberOfCitiesIsZero() {
+	@Test
+	public void getCityShouldReturnEmptyWhenNumberOfCitiesIsZero() {
 
 		HttpService httpService = Mockito.mock(HttpServiceImpl.class);
 
@@ -53,7 +57,9 @@ public class CityServiceImplTest {
 			.when(httpService.get(anyString(), any()))
 			.thenReturn(createCities(0));
 
-		new CityServiceImpl(httpService).getCity(CITY);
+		Optional<City> city = new CityServiceImpl(httpService).getCity(CITY);
+
+		assertFalse(city.isPresent());
 
 	}
 

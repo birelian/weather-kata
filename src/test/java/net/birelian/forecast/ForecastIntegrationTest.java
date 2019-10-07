@@ -8,9 +8,9 @@ import com.google.inject.Guice;
 import java.time.LocalDate;
 import net.birelian.forecast.config.GuiceConfigurationModule;
 import net.birelian.forecast.service.exception.ServiceException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
-import org.junit.platform.commons.util.StringUtils;
 
 /**
  * Test services integration

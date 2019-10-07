@@ -1,5 +1,6 @@
 package net.birelian.forecast.service;
 
+import java.util.Optional;
 import net.birelian.forecast.model.City;
 
 /**
@@ -14,5 +15,5 @@ public interface CityService {
 	 *
 	 * @return The city info
 	 */
-	City getCity(String cityName);
+	Optional<City> getCity(String cityName);
 }

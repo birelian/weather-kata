@@ -3,6 +3,7 @@ package net.birelian.forecast.service.impl;
 import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import javax.inject.Inject;
 import net.birelian.forecast.model.weather.Weather;
 import net.birelian.forecast.model.weather.WeatherDay;
@@ -25,15 +26,14 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 
 	@Override
-	public WeatherDay getForecast(final String woeid, final LocalDate date) {
+	public Optional<WeatherDay> getForecast(final String woeid, final LocalDate date) {
 
 		final Weather weather = httpService.get(SERVICE_URL + woeid, Weather.class);
 
 		return weather.getDays()
 			.stream()
 			.filter(weatherDay -> weatherDay.getDate().equals(date.toString()))
-			.findFirst()
-			.orElseThrow(() -> new ServiceException("Unable to get weather for the given day"));
+			.findFirst();
 
 	}
 

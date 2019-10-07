@@ -1,13 +1,15 @@
 package net.birelian.forecast.service.impl;
 
+import static junit.framework.TestCase.assertTrue;
 import static net.birelian.forecast.service.impl.WeatherServiceImpl.MAX_FUTURE_DAYS;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import net.birelian.forecast.model.weather.Weather;
 import net.birelian.forecast.model.weather.WeatherDay;
 import net.birelian.forecast.service.HttpService;
@@ -35,18 +37,18 @@ public class WeatherServiceImplTest {
 			.thenReturn(createWeather());
 
 		// When
-		WeatherDay forecast = new WeatherServiceImpl(httpService).getForecast(CITY, DATE);
+		Optional<WeatherDay> forecast = new WeatherServiceImpl(httpService).getForecast(CITY, DATE);
 
 		// Then
-		assertNotNull(forecast);
-		assertEquals(WEATHER,forecast.getWeather());
-		assertEquals(WIND,forecast.getWind());
-		assertEquals(DATE_AS_STRING,forecast.getDate());
+		assertTrue(forecast.isPresent());
+		assertEquals(WEATHER,forecast.get().getWeather());
+		assertEquals(WIND,forecast.get().getWind());
+		assertEquals(DATE_AS_STRING,forecast.get().getDate());
 
 	}
 
-	@Test(expected = ServiceException.class)
-	public void getForecastShouldReturnThrowExceptionWhenForecastIsNotFound() {
+	@Test
+	public void getForecastShouldReturnEmptyWhenForecastIsNotFound() {
 
 		// Given
 		HttpService httpService = Mockito.mock(HttpServiceImpl.class);
@@ -56,8 +58,9 @@ public class WeatherServiceImplTest {
 			.thenReturn(createWeather());
 
 		// When
-		new WeatherServiceImpl(httpService).getForecast(CITY, DATE.plusDays(1));
+		Optional<WeatherDay> forecast = new WeatherServiceImpl(httpService).getForecast(CITY, DATE.plusDays(1));
 
+		assertFalse(forecast.isPresent());
 	}
 
 	@Test
