@@ -13,11 +13,10 @@ public interface WeatherService {
 	 *
 	 * @param woeid The woeid
 	 * @param date The desired date
-	 * @param wind If true, get wind speed. Get weather otherwise
 	 *
 	 * @return The forecast for the given day
 	 */
-	WeatherDay getForecast(String woeid, LocalDate date, boolean wind);
+	WeatherDay getForecast(String woeid, LocalDate date);
 
 	/**
 	 * Validate that a date is valid for getting the forecast

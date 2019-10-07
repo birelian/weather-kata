@@ -46,8 +46,7 @@ class Forecast {
 		weatherService.validateDate(date);
 
 		// Get the weather for the given day
-		final WeatherDay weatherDay = weatherService.getForecast(cityService.getCity(cityName)
-			.getWoeid(), date, wind);
+		final WeatherDay weatherDay = weatherService.getForecast(cityService.getCity(cityName).getWoeid(), date);
 
 		return wind ?
 			weatherDay.getWind().toString() :

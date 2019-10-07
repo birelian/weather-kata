@@ -12,8 +12,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 import org.junit.platform.commons.util.StringUtils;
 
-// https://www.metaweather.com/api/location/766273/
-public class ForecastTest {
+/**
+ * Test services integration
+ */
+public class ForecastIntegrationTest {
 
 	private static final String CITY_NAME = "Madrid";
 

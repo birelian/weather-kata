@@ -25,7 +25,7 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 
 	@Override
-	public WeatherDay getForecast(final String woeid, final LocalDate date, final boolean wind) {
+	public WeatherDay getForecast(final String woeid, final LocalDate date) {
 
 		final Weather weather = httpService.get(SERVICE_URL + woeid, Weather.class);
 

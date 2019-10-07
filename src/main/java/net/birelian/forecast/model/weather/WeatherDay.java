@@ -2,9 +2,11 @@ package net.birelian.forecast.model.weather;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class WeatherDay implements Serializable {
 
 	@SerializedName("weather_state_name")
